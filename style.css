@@ -1,0 +1,17 @@
+body {
+    background-color: black;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#battleship {
+    width: 250px;
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 15px;
+}
