@@ -1,10 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
 body {
+    font-family: 'Bebas Neue', 'sans-serif';
     background-color: black;
     color: white;
     text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+
 }
 
 #battleship {
@@ -14,4 +20,32 @@ body {
     padding: 10px;
     border: 2px solid gray;
     border-radius: 15px;
+}
+
+#gameboardscontainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.gameboards {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    grid-column-gap: 7px;
+    grid-row-gap: 7px; 
+    padding: 30px;
+}
+
+.playerSquares {
+    background-color: white;
+    border: 1px solid gray;
+    width: 35px;
+    height: 35px;
+}
+
+.computerSquares {
+    background-color: white;
+    border: 1px solid gray;
+    width: 35px;
+    height: 35px;
 }
