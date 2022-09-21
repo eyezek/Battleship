@@ -13,7 +13,7 @@ body {
 
 }
 
-#battleship {
+#headertext {
     width: 250px;
     background-color: white;
     color: black;
@@ -48,4 +48,13 @@ body {
     border: 1px solid gray;
     width: 35px;
     height: 35px;
+}
+
+#ships {
+    display: flex;
+    flex-direction: row;
+}
+
+h2 {
+    padding: 5px;
 }
