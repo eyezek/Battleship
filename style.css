@@ -2,6 +2,8 @@
 
 
 body {
+    padding: 0;
+    margin: 0;
     font-family: 'Bebas Neue', 'sans-serif';
     background-color: black;
     color: white;
@@ -33,24 +35,50 @@ body {
     grid-template-rows: repeat(10, 1fr);
     grid-column-gap: 7px;
     grid-row-gap: 7px; 
-    padding: 30px;
+    padding: 10px;
+}
+
+.boardtext {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
 }
 
 .playerSquares {
     background-color: white;
-    border: 1px solid gray;
+    border: 1px solid blue;
     width: 35px;
     height: 35px;
+}
+
+.playerSquares:hover {
+    filter: brightness(30%)
 }
 
 .computerSquares {
     background-color: white;
-    border: 1px solid gray;
+    border: 1px solid red;
     width: 35px;
     height: 35px;
 }
 
+.computerSquares:hover {
+    filter: brightness(30%)
+}
+
+#shipstext {
+    padding: 0;
+    margin-top: 0px;
+}
+
 #ships {
+    padding: 0;
+    margin-top: 0px;
+    background-color: white;
+    color: black;
+    border: 2px solid gray;
+    border-radius: 20px;
     display: flex;
     flex-direction: row;
 }
