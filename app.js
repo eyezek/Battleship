@@ -36,7 +36,7 @@ const renderSquares = () => {
 
 const shipFactory = ((name, length) => {
   const shipLength = length;
-  let hitCount = 0;DSAD
+  let hitCount = 0;
   const hit = () => {
     hitCount++;
   };
