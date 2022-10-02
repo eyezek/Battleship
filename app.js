@@ -1,25 +1,38 @@
 playerSquares = document.getElementsByClassName("playersquares");
 computerSquares = document.getElementsByClassName("computersquares");
 
-const generatePlayerSquares = () => {
-  for (let i = 0; i < 100; i++) {
-    let square = document.createElement("div");
-    square.className = "playerSquares";
-    square.setAttribute("id", "square");
 
-    document.getElementById("playergameboard").appendChild(square);
+const makeSquares = (classname) => {
+  let squareofsquares = [];
+  for (let i = 0; i < 10; i++) {
+    let squares = [];
+    for (let j = 0; j < 10; j++) {
+      let square = document.createElement("div");
+      square.className = classname;
+      square.setAttribute("id", "square");
+      squares.push(square);
+    }
+    squareofsquares.push(squares);
   }
+  return squareofsquares;
 };
 
-const generateComputerSquares = () => {
-  for (let i = 0; i < 100; i++) {
-    let square = document.createElement("div");
-    square.className = "computerSquares";
-    square.setAttribute("id", "square");
-
-    document.getElementById("computergameboard").appendChild(square);
+const renderSquares = () => {
+  const players = [{id: "playergameboard", className: "playerSquares"}, {id: "computergameboard", className: "computerSquares"}];
+  for (let i = 0; i < players.length; i++) {
+    let gameBoard = players[i]
+    const gameSquares = makeSquares(gameBoard.className)
+    for ( let j = 0; j < gameSquares.length; j++){
+      const squareArray = gameSquares[j]
+      for (let e = 0; e < squareArray.length; e++){
+        let square = squareArray[e]
+        document.getElementById(gameBoard.id).appendChild(square);
+      }
+    }
   }
-};
+
+
+}
 
 const shipFactory = ((name, length) => {
   const shipLength = length;
@@ -45,10 +58,9 @@ const shipFactory = ((name, length) => {
 
 const gameBoard = (() => {
   "use strict";
-  const m = 10;
   const board = [];
   const populateBoard = () => {
-    for (var i = 0; i < 10; i++) {
+    for (let i = 0; i < 10; i++) {
       board[i] = []
       for (let j = 0; j < 10; j++){
         board[i].push(0)
@@ -98,8 +110,8 @@ const playerFactory = ((name) => {
 
 const game = () => {};
 
-generatePlayerSquares();
 
-generateComputerSquares();
 
-gameBoard.populateBoard;
+// gameBoard.populateBoard;
+
+renderSquares()
