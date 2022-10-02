@@ -1,7 +1,7 @@
 playerSquares = document.getElementsByClassName("playersquares");
 computerSquares = document.getElementsByClassName("computersquares");
 
-const createPlayerSquares = () => {
+const generatePlayerSquares = () => {
   for (let i = 0; i < 100; i++) {
     let square = document.createElement("div");
     square.className = "playerSquares";
@@ -11,7 +11,7 @@ const createPlayerSquares = () => {
   }
 };
 
-const createComputerSquares = () => {
+const generateComputerSquares = () => {
   for (let i = 0; i < 100; i++) {
     let square = document.createElement("div");
     square.className = "computerSquares";
@@ -46,11 +46,13 @@ const shipFactory = ((name, length) => {
 const gameBoard = (() => {
   "use strict";
   const m = 10;
-  const board = new Array(m);
+  const board = [];
   const populateBoard = () => {
-    const n = 10;
-    for (var i = 0; i < m; i++) {
-      board[i] = new Array(n);
+    for (var i = 0; i < 10; i++) {
+      board[i] = []
+      for (let j = 0; j < 10; j++){
+        board[i].push(0)
+      }
     }
     return board;
   };
@@ -96,8 +98,8 @@ const playerFactory = ((name) => {
 
 const game = () => {};
 
-createPlayerSquares();
+generatePlayerSquares();
 
-createComputerSquares();
+generateComputerSquares();
 
 gameBoard.populateBoard;
