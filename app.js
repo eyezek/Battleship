@@ -1,8 +1,8 @@
 playerSquares = document.getElementsByClassName("playersquares");
 computerSquares = document.getElementsByClassName("computersquares");
 
-
 const makeSquares = (classname) => {
+  let number = 0;
   let squareofsquares = [];
   for (let i = 0; i < 10; i++) {
     let squares = [];
@@ -10,7 +10,9 @@ const makeSquares = (classname) => {
       let square = document.createElement("div");
       square.className = classname;
       square.setAttribute("id", "square");
+      square.setAttribute("number", number);
       squares.push(square);
+      number++;
     }
     squareofsquares.push(squares);
   }
@@ -18,25 +20,22 @@ const makeSquares = (classname) => {
 };
 
 const renderSquares = () => {
-  const players = [{id: "playergameboard", className: "playerSquares"}, {id: "computergameboard", className: "computerSquares"}];
+  const players = [
+    { id: "playergameboard", className: "playerSquares" },
+    { id: "computergameboard", className: "computerSquares" },
+  ];
   for (let i = 0; i < players.length; i++) {
-    let gameBoard = players[i]
-    const gameSquares = makeSquares(gameBoard.className)
-    for ( let j = 0; j < gameSquares.length; j++){
-      const squareArray = gameSquares[j]
-      for (let e = 0; e < squareArray.length; e++){
-        let square = squareArray[e]
+    let gameBoard = players[i];
+    const gameSquares = makeSquares(gameBoard.className);
+    for (let j = 0; j < gameSquares.length; j++) {
+      const squareArray = gameSquares[j];
+      for (let e = 0; e < squareArray.length; e++) {
+        let square = squareArray[e];
         document.getElementById(gameBoard.id).appendChild(square);
       }
     }
   }
-
-
-}
-
-const ships = {Carrier: 5, Battleship: 4, Cruiser: 3, Submarine: 3, Destroyer: 2}
-
-
+};
 
 const shipFactory = ((name, length) => {
   const shipLength = length;
@@ -65,28 +64,26 @@ const gameBoard = (() => {
   const board = [];
   const populateBoard = () => {
     for (let i = 0; i < 10; i++) {
-      board[i] = []
-      for (let j = 0; j < 10; j++){
-        board[i].push(0)
+      board[i] = [];
+      for (let j = 0; j < 10; j++) {
+        board[i].push("0");
       }
     }
     return board;
   };
 
-  const placeShip = (length, name, board) => {
-    shipFactory(name, length);
-    if (shipLength < 1) {
-      return;
-    } else
-      for (let i = 0; i <= shipLength; i++) {
-        board.splice(x, shipLength, "1");
-      }
-    return board;
+  const placeShip = (name, board, x, y) => {
+    document.querySelectorAll("playersquares").forEach((square) => {
+      square.addEventListener("click", (event) => {
+        if (name === "Battleship") {
+        }
+      });
+    });
   };
 
   let missedAttacks = 0;
 
-  const receiveAttack = (board) => {
+  const receiveAttack = (x, y) => {
     if (board[x][y] === "0") {
       board[x][y];
       return missedAttacks + 1;
@@ -114,4 +111,4 @@ const playerFactory = ((name) => {
 
 const game = () => {};
 
-renderSquares()
+renderSquares();

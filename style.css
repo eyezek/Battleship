@@ -1,88 +1,111 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
 body {
-    padding: 0;
-    margin: 0;
-    font-family: 'Bebas Neue', 'sans-serif';
-    background-color: black;
-    color: white;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+  padding: 0;
+  margin: 0;
+  font-family: "Bebas Neue", "sans-serif";
+  background-color: black;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #headertext {
-    width: 250px;
-    background-color: white;
-    color: black;
-    padding: 10px;
-    border: 2px solid gray;
-    border-radius: 15px;
+  width: 250px;
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border: 2px solid gray;
+  border-radius: 15px;
 }
 
 #gameboardscontainer {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .gameboards {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    grid-column-gap: 7px;
-    grid-row-gap: 7px; 
-    padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 7px;
+  grid-row-gap: 7px;
+  padding: 10px;
 }
 
 .boardtext {
-    padding: 0;
-    margin: 0;
-    text-align: center;
-    width: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
 }
 
 .playerSquares {
-    background-color: white;
-    border: 1px solid blue;
-    width: 35px;
-    height: 35px;
+  background-color: white;
+  border: 1px solid blue;
+  width: 35px;
+  height: 35px;
 }
 
 .playerSquares:hover {
-    filter: brightness(30%)
+  filter: brightness(30%);
 }
 
 .computerSquares {
-    background-color: white;
-    border: 1px solid red;
-    width: 35px;
-    height: 35px;
+  background-color: white;
+  border: 1px solid red;
+  width: 35px;
+  height: 35px;
 }
 
 .computerSquares:hover {
-    filter: brightness(30%)
+  filter: brightness(30%);
 }
 
 #shipstext {
-    padding: 0;
-    margin-top: 0px;
+  padding: 0;
+  margin-top: 0px;
 }
 
 #ships {
-    padding: 0;
-    margin-top: 0px;
-    background-color: white;
-    color: black;
-    border: 2px solid gray;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: row;
+  padding: 0;
+  margin-top: 0px;
+  background-color: white;
+  color: black;
+  border: 2px solid gray;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.ships {
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.previewsquaregrid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-column-gap: 7px;
+  border-radius: 20px;
+  align-items: center;
+  justify-items: center;
+}
+
+#previewsquare {
+  background-color: gray;
+  border: 1px solid blue;
+  width: 35px;
+  height: 35px;
 }
 
 h2 {
-    padding: 5px;
+  padding: 5px;
 }
