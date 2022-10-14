@@ -1,19 +1,41 @@
 playerSquares = document.getElementsByClassName("playersquares");
 computerSquares = document.getElementsByClassName("computersquares");
 
+// const makeSquares = (classname) => {
+//   let number = 0;
+//   let squareofsquares = [];
+//   for (let i = 0; i < 10; i++) {
+//     let squares = [];
+//     for (let j = 0; j < 10; j++) {
+//       let square = document.createElement("div");
+//       square.className = classname;
+//       square.setAttribute("id", "square");
+//       square.setAttribute("number", number);
+//       squares.push(square);
+//       number++;
+//     }
+//     squareofsquares.push(squares);
+//   }
+//   return squareofsquares;
+// };
+
 const makeSquares = (classname) => {
-  let number = 0;
+  let num = 0;
+  let row = 0;
   let squareofsquares = [];
   for (let i = 0; i < 10; i++) {
     let squares = [];
     for (let j = 0; j < 10; j++) {
       let square = document.createElement("div");
+      square.dataset.number = num;
+      num++;
       square.className = classname;
       square.setAttribute("id", "square");
-      square.setAttribute("number", number);
+      square.setAttribute("column", j);
+      square.setAttribute("row", row);
       squares.push(square);
-      number++;
     }
+    row++;
     squareofsquares.push(squares);
   }
   return squareofsquares;
@@ -37,7 +59,7 @@ const renderSquares = () => {
   }
 };
 
-const shipFactory = ((name, length) => {
+const shipFactory = (name, length) => {
   const shipLength = length;
   let hitCount = 0;
   const hit = () => {
@@ -57,7 +79,7 @@ const shipFactory = ((name, length) => {
     hit,
     isSunk,
   };
-})();
+};
 
 const gameBoard = (() => {
   "use strict";
@@ -72,13 +94,61 @@ const gameBoard = (() => {
     return board;
   };
 
-  const placeShip = (name, board, x, y) => {
-    document.querySelectorAll("playersquares").forEach((square) => {
-      square.addEventListener("click", (event) => {
-        if (name === "Battleship") {
+  const placeShip = (x, y, name, length) => {
+    let ship = shipFactory(name, length);
+    if (ship.name === "Carrier") {
+      for (let i = 0; i <= ship.shipLength; i++) {
+        if (x > 4) {
+          console.log("error");
+          return;
         }
-      });
-    });
+        board[x][y] = ship.name;
+        board[x + 1][y] = ship.name;
+        board[x + 2][y] = ship.name;
+        board[x + 3][y] = ship.name;
+        board[x + 4][y] = ship.name;
+      }
+    } else if (ship.name === "Battleship") {
+      for (let i = 0; i <= ship.shipLength; i++) {
+        if (x > 5) {
+          console.log("error");
+          return;
+        }
+        board[x][y] = ship.name;
+        board[x + 1][y] = ship.name;
+        board[x + 2][y] = ship.name;
+        board[x + 3][y] = ship.name;
+      }
+    } else if (ship.name === "Cruiser") {
+      for (let i = 0; i <= ship.shipLength; i++) {
+        if (x > 6) {
+          console.log("error");
+          return;
+        }
+        board[x][y] = ship.name;
+        board[x + 1][y] = ship.name;
+        board[x + 2][y] = ship.name;
+      }
+    } else if (ship.name === "Submarine") {
+      for (let i = 0; i <= ship.shipLength; i++) {
+        if (x > 6) {
+          console.log("error");
+          return;
+        }
+        board[x][y] = ship.name;
+        board[x + 1][y] = ship.name;
+        board[x + 2][y] = ship.name;
+      }
+    } else if (ship.name === "Destroyer") {
+      for (let i = 0; i <= ship.shipLength; i++) {
+        if (x > 7) {
+          console.log("error");
+          return;
+        }
+        board[x][y] = ship.name;
+        board[x + 1][y] = ship.name;
+      }
+    }
   };
 
   let missedAttacks = 0;
@@ -112,3 +182,9 @@ const playerFactory = ((name) => {
 const game = () => {};
 
 renderSquares();
+
+gameBoard.populateBoard();
+
+document.querySelectorAll("playersquares").forEach((square) => {
+  square.addEventListener("click", placeShip(carrier));
+});
