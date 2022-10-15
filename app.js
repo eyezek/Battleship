@@ -31,8 +31,8 @@ const makeSquares = (classname) => {
       num++;
       square.className = classname;
       square.setAttribute("id", "square");
-      square.setAttribute("column", j);
-      square.setAttribute("row", row);
+      square.setAttribute("x", j);
+      square.setAttribute("y", row);
       squares.push(square);
     }
     row++;
@@ -99,10 +99,13 @@ const gameBoard = (() => {
     if (ship.name === "Carrier") {
       for (let i = 0; i <= ship.shipLength; i++) {
         if (x > 4) {
-          console.log("error");
+          console.log("Ship placed out of bounds");
           return;
         }
         board[x][y] = ship.name;
+        document
+          .querySelectorAll("[x=${x}", "y=${y}]")
+          .classList.add("placedShip");
         board[x + 1][y] = ship.name;
         board[x + 2][y] = ship.name;
         board[x + 3][y] = ship.name;
@@ -111,7 +114,7 @@ const gameBoard = (() => {
     } else if (ship.name === "Battleship") {
       for (let i = 0; i <= ship.shipLength; i++) {
         if (x > 5) {
-          console.log("error");
+          console.log("Ship placed out of bounds");
           return;
         }
         board[x][y] = ship.name;
@@ -122,7 +125,7 @@ const gameBoard = (() => {
     } else if (ship.name === "Cruiser") {
       for (let i = 0; i <= ship.shipLength; i++) {
         if (x > 6) {
-          console.log("error");
+          console.log("Ship placed out of bounds");
           return;
         }
         board[x][y] = ship.name;
@@ -132,7 +135,7 @@ const gameBoard = (() => {
     } else if (ship.name === "Submarine") {
       for (let i = 0; i <= ship.shipLength; i++) {
         if (x > 6) {
-          console.log("error");
+          console.log("Ship placed out of bounds");
           return;
         }
         board[x][y] = ship.name;
@@ -142,7 +145,7 @@ const gameBoard = (() => {
     } else if (ship.name === "Destroyer") {
       for (let i = 0; i <= ship.shipLength; i++) {
         if (x > 7) {
-          console.log("error");
+          console.log("Ship placed out of bounds");
           return;
         }
         board[x][y] = ship.name;
