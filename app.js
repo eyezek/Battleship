@@ -97,59 +97,107 @@ const gameBoard = (() => {
   const placeShip = (x, y, name, length) => {
     let ship = shipFactory(name, length);
     if (ship.name === "Carrier") {
-      for (let i = 0; i <= ship.shipLength; i++) {
+      for (let i = 0; i < ship.shipLength; i++) {
         if (x > 4) {
           console.log("Ship placed out of bounds");
           return;
         }
-        board[x][y] = ship.name;
+        board[x][y] = ship;
         document
-          .querySelectorAll("[x=${x}", "y=${y}]")
+          .querySelector(`[x='${x}'][y='${y}']`)
           .classList.add("placedShip");
-        board[x + 1][y] = ship.name;
-        board[x + 2][y] = ship.name;
-        board[x + 3][y] = ship.name;
-        board[x + 4][y] = ship.name;
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
       }
     } else if (ship.name === "Battleship") {
-      for (let i = 0; i <= ship.shipLength; i++) {
+      for (let i = 0; i < ship.shipLength; i++) {
         if (x > 5) {
           console.log("Ship placed out of bounds");
           return;
         }
-        board[x][y] = ship.name;
-        board[x + 1][y] = ship.name;
-        board[x + 2][y] = ship.name;
-        board[x + 3][y] = ship.name;
+        board[x][y] = ship;
+        document
+          .querySelector(`[x='${x}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
       }
     } else if (ship.name === "Cruiser") {
-      for (let i = 0; i <= ship.shipLength; i++) {
+      for (let i = 0; i < ship.shipLength; i++) {
         if (x > 6) {
           console.log("Ship placed out of bounds");
           return;
         }
-        board[x][y] = ship.name;
-        board[x + 1][y] = ship.name;
-        board[x + 2][y] = ship.name;
+        board[x][y] = ship;
+        document
+          .querySelector(`[x='${x}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
       }
     } else if (ship.name === "Submarine") {
-      for (let i = 0; i <= ship.shipLength; i++) {
+      for (let i = 0; i < ship.shipLength; i++) {
         if (x > 6) {
           console.log("Ship placed out of bounds");
           return;
         }
-        board[x][y] = ship.name;
-        board[x + 1][y] = ship.name;
-        board[x + 2][y] = ship.name;
+        board[x][y] = ship;
+        document
+          .querySelector(`[x='${x}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
       }
     } else if (ship.name === "Destroyer") {
-      for (let i = 0; i <= ship.shipLength; i++) {
+      for (let i = 0; i < ship.shipLength; i++) {
         if (x > 7) {
           console.log("Ship placed out of bounds");
           return;
         }
-        board[x][y] = ship.name;
-        board[x + 1][y] = ship.name;
+        board[x][y] = ship;
+        document
+          .querySelector(`[x='${x}'][y='${y}']`)
+          .classList.add("placedShip");
+        board[x + i][y] = ship;
+        document
+          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .classList.add("placedShip");
       }
     }
   };
