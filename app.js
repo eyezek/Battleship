@@ -95,11 +95,15 @@ const gameBoard = (() => {
   };
 
   const placeShip = (x, y, name, length) => {
+    document.getElementById("oobpopup").innerText = "";
+    let currentShip = "Carrier";
     let ship = shipFactory(name, length);
-    if (ship.name === "Carrier") {
+    if (currentShip === "Carrier") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 4) {
-          console.log("Ship placed out of bounds");
+          console.log("Ship placed out of bounds...");
+          document.getElementById("oobpopup").innerText =
+            "Ship placed out of bounds :( Try again! :)";
           return;
         }
         board[x][y] = ship;
@@ -122,11 +126,14 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
+        currentShip = "Battleship";
       }
-    } else if (ship.name === "Battleship") {
+    } else if (currentShip === "Battleship") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 5) {
-          console.log("Ship placed out of bounds");
+          console.log("Ship placed out of bounds...");
+          document.getElementById("oobpopup").innerText =
+            "Ship placed out of bounds :( Try again! :)";
           return;
         }
         board[x][y] = ship;
@@ -145,11 +152,14 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
+        currentShip = "Cruiser";
       }
-    } else if (ship.name === "Cruiser") {
+    } else if (currentShip === "Cruiser") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 6) {
-          console.log("Ship placed out of bounds");
+          console.log("Ship placed out of bounds...");
+          document.getElementById("oobpopup").innerText =
+            "Ship placed out of bounds :( Try again! :)";
           return;
         }
         board[x][y] = ship;
@@ -164,11 +174,14 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
+        currentShip = "Submarine";
       }
-    } else if (ship.name === "Submarine") {
+    } else if (currentShip === "Submarine") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 6) {
-          console.log("Ship placed out of bounds");
+          console.log("Ship placed out of bounds...");
+          document.getElementById("oobpopup").innerText =
+            "Ship placed out of bounds :( Try again! :)";
           return;
         }
         board[x][y] = ship;
@@ -183,11 +196,14 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
+        currentShip = "Destroyer";
       }
-    } else if (ship.name === "Destroyer") {
+    } else if (currentShip === "Destroyer") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 7) {
-          console.log("Ship placed out of bounds");
+          console.log("Ship placed out of bounds...");
+          document.getElementById("oobpopup").innerText =
+            "Ship placed out of bounds :( Try again! :)";
           return;
         }
         board[x][y] = ship;
@@ -235,7 +251,3 @@ const game = () => {};
 renderSquares();
 
 gameBoard.populateBoard();
-
-document.querySelectorAll("playersquares").forEach((square) => {
-  square.addEventListener("click", placeShip(carrier));
-});
