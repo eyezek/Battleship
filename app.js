@@ -278,6 +278,6 @@ const game = () => {};
 
 renderSquares();
 
-gameBoard.placeShipOnClick;
+gameBoard.placeShipOnClick();
 
 gameBoard.populateBoard();
