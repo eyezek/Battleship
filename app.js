@@ -226,17 +226,16 @@ const gameBoard = (() => {
   };
 
   const placeShipOnClick = () => {
-    for (let i = 0; i < playerSquares.length; i++) {
-      playerSquares[i].addEventListener(
-        "click",
+    playerSquares.forEach((square) => {
+      square.addEventListener("click", function () {
         placeShip(
           square.dataset.x,
           square.dataset.y,
           currentShip,
           currentShipLength
-        )
-      );
-    }
+        );
+      });
+    });
   };
 
   let missedAttacks = 0;
