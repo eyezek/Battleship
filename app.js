@@ -1,6 +1,3 @@
-let playerSquares = document.querySelectorAll(".playersquares");
-let computerSquares = document.getElementsByClassName("computersquares");
-
 // const makeSquares = (classname) => {
 //   let number = 0;
 //   let squareofsquares = [];
@@ -59,6 +56,10 @@ const renderSquares = () => {
   }
 };
 
+renderSquares();
+
+let computerSquares = document.getElementsByClassName("computerSquares");
+
 const shipFactory = (name, length) => {
   const shipLength = length;
   let hitCount = 0;
@@ -99,11 +100,11 @@ const gameBoard = (() => {
 
   const placeShip = (x, y, name, length) => {
     document.getElementById("oobpopup").innerText = "";
+    let currentShip = "Carrier";
     let ship = shipFactory(name, length);
-    if (ship.name === "Carrier") {
+    if (currentShip === "Carrier") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 4) {
-          console.log("Ship placed out of bounds");
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerText =
             "Ship placed out of bounds :( Try again! :)";
@@ -129,12 +130,11 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
-        return (currentShip = "Battleship"), (currentShipLength = 4);
+        currentShip = "Battleship";
       }
-    } else if (ship.name === "Battleship") {
+    } else if (currentShip === "Battleship") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 5) {
-          console.log("Ship placed out of bounds");
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerText =
             "Ship placed out of bounds :( Try again! :)";
@@ -156,12 +156,11 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
-        return (currentShip = "Cruiser"), (currentShipLength = 3);
+        currentShip = "Cruiser";
       }
-    } else if (ship.name === "Cruiser") {
+    } else if (currentShip === "Cruiser") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 6) {
-          console.log("Ship placed out of bounds");
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerText =
             "Ship placed out of bounds :( Try again! :)";
@@ -179,12 +178,11 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
-        return (currentShip = "Submarine"), (currentShipLength = 3);
+        currentShip = "Submarine";
       }
-    } else if (ship.name === "Submarine") {
+    } else if (currentShip === "Submarine") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 6) {
-          console.log("Ship placed out of bounds");
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerText =
             "Ship placed out of bounds :( Try again! :)";
@@ -202,12 +200,11 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
-        return (currentShip = "Destroyer"), (currentShipLength = 2);
+        currentShip = "Destroyer";
       }
-    } else if (ship.name === "Destroyer") {
+    } else if (currentShip === "Destroyer") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 7) {
-          console.log("Ship placed out of bounds");
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerText =
             "Ship placed out of bounds :( Try again! :)";
@@ -226,11 +223,17 @@ const gameBoard = (() => {
   };
 
   const placeShipOnClick = () => {
+    let playerSquares = document.querySelectorAll(".playerSquares");
     playerSquares.forEach((square) => {
       square.addEventListener("click", function () {
+        const x = square.getAttribute("x"),
+          y = square.getAttribute("y");
+        console.log(
+          `x: ${x}, y: ${y}, ship: ${currentShip}, length: ${currentShipLength}`
+        );
         placeShip(
-          square.dataset.x,
-          square.dataset.y,
+          square.getAttribute("x"),
+          square.getAttribute("y"),
           currentShip,
           currentShipLength
         );
@@ -275,8 +278,6 @@ const playerFactory = ((name) => {
 
 const game = () => {};
 
-renderSquares();
+gameBoard.populateBoard();
 
 gameBoard.placeShipOnClick();
-
-gameBoard.populateBoard();
