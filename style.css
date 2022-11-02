@@ -122,3 +122,13 @@ body {
 h2 {
   padding: 5px;
 }
+
+#instructionsdiv {
+  height: 100px;
+  width: 100%;
+}
+
+#instructions {
+  height: 100px;
+  color: white;
+}
