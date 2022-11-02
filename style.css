@@ -23,6 +23,8 @@ body {
 }
 
 #gameboardscontainer {
+  margin: 0px;
+  padding: 0px;
   display: flex;
   flex-direction: row;
 }
@@ -124,11 +126,11 @@ h2 {
 }
 
 #instructionsdiv {
-  height: 100px;
+  padding: 0px;
+  margin: 0px;
   width: 100%;
 }
 
 #instructions {
-  height: 100px;
   color: white;
 }
