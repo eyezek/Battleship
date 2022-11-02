@@ -242,7 +242,7 @@ const gameBoard = (() => {
         document
           .querySelector(`[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
-        gameBoard.displayInstructions();
+        document.getElementById("instructions").innerHTML = "";
       }
       return currentShip;
     }
