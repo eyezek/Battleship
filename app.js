@@ -16,8 +16,7 @@
 //   return squareofsquares;
 // };
 
-instructionsText = document.getElementById("instructions");
-
+// make squares that are to be rendered later
 const makeSquares = (classname) => {
   let num = 0;
   let row = 0;
@@ -29,7 +28,6 @@ const makeSquares = (classname) => {
       square.dataset.number = num;
       num++;
       square.className = classname;
-      square.setAttribute("id", "square");
       square.setAttribute("x", j);
       square.setAttribute("y", row);
       squares.push(square);
@@ -40,6 +38,7 @@ const makeSquares = (classname) => {
   return squareofsquares;
 };
 
+// render squares on page
 const renderSquares = () => {
   const players = [
     { id: "playergameboard", className: "playerSquares" },
@@ -89,17 +88,30 @@ let currentShipLength = 5;
 
 const gameBoard = (() => {
   "use strict";
-  const board = [];
-  const populateBoard = () => {
+  const playerBoard = [];
+  // populate player board array
+  const populatePlayerBoard = () => {
     for (let i = 0; i < 10; i++) {
-      board[i] = [];
+      playerBoard[i] = [];
       for (let j = 0; j < 10; j++) {
-        board[i].push("0");
+        playerBoard[i].push("0");
       }
     }
-    return board;
+    return playerBoard;
   };
 
+  const computerBoard = [];
+  // populate computer board array
+  const populateComputerBoard = () => {
+    for (let i = 0; i < 10; i++) {
+      computerBoard[i] = [];
+      for (let j = 0; j < 10; j++) {
+        computerBoard[i].push("0");
+      }
+    }
+    return computerBoard;
+  };
+  // display "place x ship" instructions on page
   const displayInstructions = () => {
     if (currentShip === "Carrier") {
       document.getElementById("instructions").innerHTML =
@@ -119,7 +131,8 @@ const gameBoard = (() => {
     }
   };
 
-  const placeShip = (x, y, name, length) => {
+  // fill player board array with ship and fill the correct squares
+  const placeShip = (x, y, name, length, board, cl) => {
     document.getElementById("oobpopup").innerHTML = "";
     let ship = shipFactory(name, length);
     if (currentShip === "Carrier") {
@@ -132,23 +145,23 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[x='${x}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         gameBoard.displayInstructions();
         (currentShip = "Battleship"), (currentShipLength = 4);
@@ -163,19 +176,19 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[x='${x}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         gameBoard.displayInstructions();
         (currentShip = "Cruiser"), (currentShipLength = 3);
@@ -190,15 +203,15 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[x='${x}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         gameBoard.displayInstructions();
         (currentShip = "Submarine"), (currentShipLength = 3);
@@ -213,15 +226,15 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[x='${x}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         gameBoard.displayInstructions();
         (currentShip = "Destroyer"), (currentShipLength = 2);
@@ -236,18 +249,18 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[x='${x}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[x='${x + i}'][y='${y}']`)
+          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         document.getElementById("instructions").innerHTML = "";
       }
       return currentShip;
     }
   };
-
+  // on click, run place ship function and place from clicked square onward... horizontally for now
   const placeShipOnClick = () => {
     let playerSquares = document.querySelectorAll(".playerSquares");
     playerSquares.forEach((square) => {
@@ -258,25 +271,63 @@ const gameBoard = (() => {
         console.log(
           `x: ${x}, y: ${y}, ship: ${currentShip}, length: ${currentShipLength}`
         );
-        placeShip(+x, +y, currentShip, currentShipLength);
+        placeShip(
+          +x,
+          +y,
+          currentShip,
+          currentShipLength,
+          playerBoard,
+          playerSquares
+        );
       });
     });
   };
 
+  const generateComputerShips = () => {
+    let randomNum1 = Math.floor(Math.random() * (10 - 0) + 0);
+    let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+    console.log(randomNum1, randomNum2);
+    let Carrier = shipFactory("Carrier", 5);
+    let Battleship = shipFactory("Battleship", 4);
+    let Cruiser = shipFactory("Cruiser", 3);
+    let Submarine = shipFactory("Submarine", 3);
+    let Destroyer = shipFactory("Destroyer", 2);
+    if (randomNum1 > 5) {
+      placeShip(
+        randomNum2,
+        randomNum1,
+        "Carrier",
+        5,
+        computerBoard,
+        computerSquares
+      );
+    }
+    placeShip(
+      randomNum1,
+      randomNum2,
+      "Carrier",
+      5,
+      computerBoard,
+      computerSquares
+    );
+  };
+
   let missedAttacks = 0;
 
-  const receiveAttack = (x, y) => {
-    if (board[x][y] === "0") {
-      board[x][y];
+  // go through board array and mark ship as being hit if available
+  const receiveAttack = (x, y, arr) => {
+    if (arr[x][y] === "0") {
+      arr[x][y];
       return missedAttacks + 1;
     } else {
       shipFactory.hit();
     }
   };
 
-  const checkIfAllSunk = (board) => {
+  // check if all ships have been sunk in array
+  const checkIfAllSunk = (arr) => {
     for (let i = 0; i <= board.length; i++) {
-      if (board[x] === "0" && board[y] === "0") {
+      if (arr[x] === "0" && arr[y] === "0") {
         return true;
       } else {
         return false;
@@ -286,9 +337,12 @@ const gameBoard = (() => {
 
   return {
     displayInstructions,
-    populateBoard,
-    board,
+    populatePlayerBoard,
+    playerBoard,
+    populateComputerBoard,
+    computerBoard,
     placeShip,
+    generateComputerShips,
     receiveAttack,
     checkIfAllSunk,
     placeShipOnClick,
@@ -301,7 +355,11 @@ const playerFactory = ((name) => {
 
 const game = () => {};
 
-gameBoard.populateBoard();
+gameBoard.populatePlayerBoard();
+
+gameBoard.populateComputerBoard();
+
+gameBoard.generateComputerShips();
 
 gameBoard.placeShipOnClick();
 
