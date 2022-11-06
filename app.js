@@ -131,7 +131,7 @@ const gameBoard = (() => {
     }
   };
 
-  // fill player board array with ship and fill the correct squares
+  // fill board array with ship and fill the correct squares in dom
   const placeShip = (x, y, name, length, board, cl) => {
     document.getElementById("oobpopup").innerHTML = "";
     let ship = shipFactory(name, length);
@@ -145,24 +145,29 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x}'][y='${y}']`)
           .classList.add("placedShip");
+        console.log(document.querySelector(`${cl}[x='${x}'][y='${y}']`));
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
+        console.log(document.querySelector(`${cl}[x='${x + i}'][y='${y}']`));
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
+        console.log(document.querySelector(`${cl}[x='${x + i}'][y='${y}']`));
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
+        console.log(document.querySelector(`${cl}[x='${x + i}'][y='${y}']`));
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
+        console.log(document.querySelector(`${cl}[x='${x + i}'][y='${y}']`));
         gameBoard.displayInstructions();
         (currentShip = "Battleship"), (currentShipLength = 4);
       }
@@ -277,14 +282,14 @@ const gameBoard = (() => {
           currentShip,
           currentShipLength,
           playerBoard,
-          playerSquares
+          ".playerSquares"
         );
       });
     });
   };
 
   const generateComputerShips = () => {
-    let randomNum1 = Math.floor(Math.random() * (10 - 0) + 0);
+    let randomNum1 = Math.floor(Math.random() * (5 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
     console.log(randomNum1, randomNum2);
     let Carrier = shipFactory("Carrier", 5);
@@ -293,14 +298,7 @@ const gameBoard = (() => {
     let Submarine = shipFactory("Submarine", 3);
     let Destroyer = shipFactory("Destroyer", 2);
     if (randomNum1 > 5) {
-      placeShip(
-        randomNum2,
-        randomNum1,
-        "Carrier",
-        5,
-        computerBoard,
-        computerSquares
-      );
+      return;
     }
     placeShip(
       randomNum1,
@@ -308,7 +306,7 @@ const gameBoard = (() => {
       "Carrier",
       5,
       computerBoard,
-      computerSquares
+      ".computerSquares"
     );
   };
 
@@ -359,8 +357,8 @@ gameBoard.populatePlayerBoard();
 
 gameBoard.populateComputerBoard();
 
-gameBoard.generateComputerShips();
-
 gameBoard.placeShipOnClick();
+
+gameBoard.generateComputerShips();
 
 gameBoard.displayInstructions();
