@@ -288,9 +288,15 @@ const gameBoard = (() => {
     });
   };
 
-  const placeShipForGeneration = () => {
-    let currentShip = "Carrier";
-    let ship = shipFactory(name, length);
+  const placeShipForGeneration = (
+    x,
+    y,
+    currentShip,
+    currentShipLength,
+    board,
+    cl
+  ) => {
+    let ship = shipFactory(currentShip, currentShipLength);
     if (currentShip === "Carrier") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 4) {
@@ -494,6 +500,6 @@ gameBoard.populateComputerBoard();
 
 gameBoard.placeShipOnClick();
 
-gameBoard.generateComputerShips();
-
 gameBoard.displayInstructions();
+
+gameBoard.generateComputerShips();
