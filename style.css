@@ -56,13 +56,6 @@ body {
   filter: brightness(30%);
 }
 
-.placedShip {
-  background-color: blue;
-  border: 1px solid gray;
-  width: 35px;
-  height: 35px;
-}
-
 .computerSquares {
   background-color: white;
   border: 1px solid red;
@@ -72,6 +65,13 @@ body {
 
 .computerSquares:hover {
   filter: brightness(30%);
+}
+
+.placedShip {
+  background-color: blue;
+  border: 1px solid gray;
+  width: 35px;
+  height: 35px;
 }
 
 #shipstext {

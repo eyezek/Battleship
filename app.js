@@ -59,8 +59,6 @@ const renderSquares = () => {
 
 renderSquares();
 
-let computerSquares = document.getElementsByClassName("computerSquares");
-
 const shipFactory = (name, length) => {
   const shipLength = length;
   let hitCount = 0;
@@ -343,19 +341,19 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         gameBoard.displayInstructions();
         (currentShip = "Cruiser"), (currentShipLength = 3);
@@ -370,15 +368,15 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         gameBoard.displayInstructions();
         (currentShip = "Submarine"), (currentShipLength = 3);
@@ -393,15 +391,15 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         gameBoard.displayInstructions();
         (currentShip = "Destroyer"), (currentShipLength = 2);
@@ -416,11 +414,11 @@ const gameBoard = (() => {
         }
         board[x][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x}'][y='${y}']`)
           .classList.add("placedShip");
         board[x + i][y] = ship;
         document
-          .querySelector(`[class='${cl}'][x='${x + i}'][y='${y}']`)
+          .querySelector(`${cl}[x='${x + i}'][y='${y}']`)
           .classList.add("placedShip");
         document.getElementById("instructions").innerHTML = "";
       }
@@ -428,23 +426,72 @@ const gameBoard = (() => {
     }
   };
 
-  const generateComputerShips = () => {
-    let randomNum1 = Math.floor(Math.random() * (5 - 0) + 0);
+  const generateComputerCarrierShip = () => {
+    let randomNum1 = Math.floor(Math.random() * (4 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
     console.log(randomNum1, randomNum2);
     let Carrier = shipFactory("Carrier", 5);
-    let Battleship = shipFactory("Battleship", 4);
-    let Cruiser = shipFactory("Cruiser", 3);
-    let Submarine = shipFactory("Submarine", 3);
-    let Destroyer = shipFactory("Destroyer", 2);
-    if (randomNum1 > 5) {
-      return;
-    }
     placeShipForGeneration(
       randomNum1,
       randomNum2,
       "Carrier",
-      5,
+      Carrier.shipLength,
+      computerBoard,
+      ".computerSquares"
+    );
+  };
+
+  const generateComputerBattleship = () => {
+    let randomNum1 = Math.floor(Math.random() * (5 - 0) + 0);
+    let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+    let Battleship = shipFactory("Battleship", 4);
+    placeShipForGeneration(
+      randomNum1,
+      randomNum2,
+      "Battleship",
+      Battleship.shipLength,
+      computerBoard,
+      ".computerSquares"
+    );
+  };
+
+  const generateComputerCruiserShip = () => {
+    let randomNum1 = Math.floor(Math.random() * (6 - 0) + 0);
+    let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+    let Cruiser = shipFactory("Cruiser", 3);
+    placeShipForGeneration(
+      randomNum1,
+      randomNum2,
+      "Cruiser",
+      Cruiser.shipLength,
+      computerBoard,
+      ".computerSquares"
+    );
+  };
+
+  const generateComputerSubmarineShip = () => {
+    let randomNum1 = Math.floor(Math.random() * (6 - 0) + 0);
+    let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+    let Submarine = shipFactory("Submarine", 3);
+    placeShipForGeneration(
+      randomNum1,
+      randomNum2,
+      "Submarine",
+      Submarine.shipLength,
+      computerBoard,
+      ".computerSquares"
+    );
+  };
+
+  const generateComputerDestroyerShip = () => {
+    let randomNum1 = Math.floor(Math.random() * (7 - 0) + 0);
+    let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+    let Destroyer = shipFactory("Destroyer", 2);
+    placeShipForGeneration(
+      randomNum1,
+      randomNum2,
+      "Destroyer",
+      Destroyer.shipLength,
       computerBoard,
       ".computerSquares"
     );
@@ -481,7 +528,11 @@ const gameBoard = (() => {
     computerBoard,
     placeShipForClick,
     placeShipForGeneration,
-    generateComputerShips,
+    generateComputerCarrierShip,
+    generateComputerBattleship,
+    generateComputerCruiserShip,
+    generateComputerSubmarineShip,
+    generateComputerDestroyerShip,
     receiveAttack,
     checkIfAllSunk,
     placeShipOnClick,
@@ -502,4 +553,12 @@ gameBoard.placeShipOnClick();
 
 gameBoard.displayInstructions();
 
-gameBoard.generateComputerShips();
+gameBoard.generateComputerCarrierShip();
+
+gameBoard.generateComputerBattleship();
+
+gameBoard.generateComputerCruiserShip();
+
+gameBoard.generateComputerSubmarineShip();
+
+gameBoard.generateComputerDestroyerShip();
