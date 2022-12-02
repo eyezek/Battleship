@@ -295,14 +295,17 @@ const gameBoard = (() => {
     cl
   ) => {
     let ship = shipFactory(currentShip, currentShipLength);
-    if (currentShip === "Carrier") {
+    if (board[x][y] != null) {
+      return placeShipForGeneration(
+        x,
+        y,
+        currentShip,
+        currentShipLength,
+        board,
+        cl
+      );
+    } else if (currentShip === "Carrier") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 4) {
-          console.log("Ship placed out of bounds...");
-          document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
-          return;
-        }
         board[x][y] = ship;
         document
           .querySelector(`${cl}[x='${x}'][y='${y}']`)
@@ -333,12 +336,6 @@ const gameBoard = (() => {
       }
     } else if (currentShip === "Battleship") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 5) {
-          console.log("Ship placed out of bounds...");
-          document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
-          return;
-        }
         board[x][y] = ship;
         document
           .querySelector(`${cl}[x='${x}'][y='${y}']`)
@@ -360,12 +357,6 @@ const gameBoard = (() => {
       }
     } else if (currentShip === "Cruiser") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 6) {
-          console.log("Ship placed out of bounds...");
-          document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
-          return;
-        }
         board[x][y] = ship;
         document
           .querySelector(`${cl}[x='${x}'][y='${y}']`)
@@ -383,12 +374,6 @@ const gameBoard = (() => {
       }
     } else if (currentShip === "Submarine") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 6) {
-          console.log("Ship placed out of bounds...");
-          document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
-          return;
-        }
         board[x][y] = ship;
         document
           .querySelector(`${cl}[x='${x}'][y='${y}']`)
@@ -406,12 +391,6 @@ const gameBoard = (() => {
       }
     } else if (currentShip === "Destroyer") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 7) {
-          console.log("Ship placed out of bounds...");
-          document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
-          return;
-        }
         board[x][y] = ship;
         document
           .querySelector(`${cl}[x='${x}'][y='${y}']`)
@@ -507,6 +486,12 @@ const gameBoard = (() => {
     } else {
       shipFactory.hit();
     }
+  };
+
+  const sendComputerAttack = (arr) => {
+    let randomNum1 = Math.floor(Math.random() * (10 - 0) + 0);
+    let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+    receiveAttack(randomNum1, randomNum2, arr);
   };
 
   // check if all ships have been sunk in array
