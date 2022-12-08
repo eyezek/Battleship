@@ -296,14 +296,62 @@ const gameBoard = (() => {
   ) => {
     let ship = shipFactory(currentShip, currentShipLength);
     if (board[x][y] != null) {
-      return placeShipForGeneration(
-        x,
-        y,
-        currentShip,
-        currentShipLength,
-        board,
-        cl
-      );
+      if (currentShip === "Carrier") {
+        let randomNum1 = Math.floor(Math.random() * (4 - 0) + 0);
+        let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+        return placeShipForGeneration(
+          randomNum1,
+          randomNum2,
+          currentShip,
+          currentShipLength,
+          board,
+          cl
+        );
+      } else if (currentShip === "Battleship") {
+        let randomNum1 = Math.floor(Math.random() * (5 - 0) + 0);
+        let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+        return placeShipForGeneration(
+          randomNum1,
+          randomNum2,
+          currentShip,
+          currentShipLength,
+          board,
+          cl
+        );
+      } else if (currentShip === "Cruiser") {
+        let randomNum1 = Math.floor(Math.random() * (6 - 0) + 0);
+        let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+        return placeShipForGeneration(
+          randomNum1,
+          randomNum2,
+          currentShip,
+          currentShipLength,
+          board,
+          cl
+        );
+      } else if (currentShip === "Submarine") {
+        let randomNum1 = Math.floor(Math.random() * (6 - 0) + 0);
+        let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+        return placeShipForGeneration(
+          randomNum1,
+          randomNum2,
+          currentShip,
+          currentShipLength,
+          board,
+          cl
+        );
+      } else if ((currentShip = "Destroyer")) {
+        let randomNum1 = Math.floor(Math.random() * (7 - 0) + 0);
+        let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
+        return placeShipForGeneration(
+          randomNum1,
+          randomNum2,
+          currentShip,
+          currentShipLength,
+          board,
+          cl
+        );
+      }
     } else if (currentShip === "Carrier") {
       for (let i = 0; i < ship.shipLength; i++) {
         board[x][y] = ship;
