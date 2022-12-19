@@ -59,27 +59,26 @@ const renderSquares = () => {
 
 renderSquares();
 
-const shipFactory = (name, length) => {
-  const shipLength = length;
-  let hitCount = 0;
-  const hit = () => {
-    hitCount++;
+class Ship {
+  constructor(name, length) {
+    this.name = name;
+    this.shipLength = length;
+    this.hitCount = 0;
+  }
+  hit = (x, y) => {
+    if (this.isSunk()) {
+      console.log("already sank");
+      return;
+    }
+    this.hitCount++;
   };
-  const isSunk = () => {
-    if (hitCount >= shipLength) {
+  isSunk = () => {
+    if (this.hitCount >= this.shipLength) {
       return true;
     }
     return false;
   };
-
-  return {
-    name,
-    shipLength,
-    hitCount,
-    hit,
-    isSunk,
-  };
-};
+}
 
 let currentShip = "Carrier";
 let currentShipLength = 5;
@@ -132,7 +131,7 @@ const gameBoard = (() => {
   // fill board array with ship and fill the correct squares in dom
   const placeShipForClick = (x, y, name, length, board, cl) => {
     document.getElementById("oobpopup").innerHTML = "";
-    let ship = shipFactory(name, length);
+    let ship = new Ship(name, length);
     if (currentShip === "Carrier") {
       for (let i = 0; i < ship.shipLength; i++) {
         if (x > 4) {
@@ -299,7 +298,7 @@ const gameBoard = (() => {
         break;
       }
     }
-    let ship = shipFactory(currentShip, currentShipLength);
+    let ship = new Ship(currentShip, currentShipLength);
     if (currentShip === "Carrier") {
       for (let i = 0; i < ship.shipLength; i++) {
         board[x][y] = ship;
@@ -354,7 +353,7 @@ const gameBoard = (() => {
     let randomNum1 = Math.floor(Math.random() * (4 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
     console.log(randomNum1, randomNum2);
-    let Carrier = shipFactory("Carrier", 5);
+    let Carrier = new Ship("Carrier", 5);
     placeShipForGeneration(
       randomNum1,
       randomNum2,
@@ -368,7 +367,7 @@ const gameBoard = (() => {
   const generateComputerBattleship = () => {
     let randomNum1 = Math.floor(Math.random() * (5 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
-    let Battleship = shipFactory("Battleship", 4);
+    let Battleship = new Ship("Battleship", 4);
     placeShipForGeneration(
       randomNum1,
       randomNum2,
@@ -382,7 +381,7 @@ const gameBoard = (() => {
   const generateComputerCruiserShip = () => {
     let randomNum1 = Math.floor(Math.random() * (6 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
-    let Cruiser = shipFactory("Cruiser", 3);
+    let Cruiser = new Ship("Cruiser", 3);
     placeShipForGeneration(
       randomNum1,
       randomNum2,
@@ -396,7 +395,7 @@ const gameBoard = (() => {
   const generateComputerSubmarineShip = () => {
     let randomNum1 = Math.floor(Math.random() * (6 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
-    let Submarine = shipFactory("Submarine", 3);
+    let Submarine = new Ship("Submarine", 3);
     placeShipForGeneration(
       randomNum1,
       randomNum2,
@@ -410,7 +409,7 @@ const gameBoard = (() => {
   const generateComputerDestroyerShip = () => {
     let randomNum1 = Math.floor(Math.random() * (7 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
-    let Destroyer = shipFactory("Destroyer", 2);
+    let Destroyer = new Ship("Destroyer", 2);
     placeShipForGeneration(
       randomNum1,
       randomNum2,
@@ -423,20 +422,24 @@ const gameBoard = (() => {
 
   let missedAttacks = 0;
 
-  // go through board array and mark ship as being hit if available
-  const receiveAttack = (x, y, arr) => {
-    if (arr[x][y] === "0") {
-      arr[x][y];
+  // go through board array and mark ship as being hit if available. change css class to reflect that
+  const receiveAttack = (x, y, board, cl) => {
+    if (board[x][y] == "0") {
+      board[x][y];
+      document
+        .querySelector(`${cl}[x='${x}'][y='${y}']`)
+        .classList.add("missed");
       return missedAttacks + 1;
     } else {
-      shipFactory.hit();
+      board[x][y].hit();
+      document.querySelector(`${cl}[x='${x}'][y='${y}']`).classList.add("hit");
     }
   };
 
-  const sendComputerAttack = (arr) => {
+  const sendComputerAttack = () => {
     let randomNum1 = Math.floor(Math.random() * (10 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
-    receiveAttack(randomNum1, randomNum2, arr);
+    receiveAttack(randomNum1, randomNum2, playerBoard, ".playerSquares");
   };
 
   const attackComputerBoardOnClick = () => {
@@ -445,13 +448,13 @@ const gameBoard = (() => {
       square.addEventListener("click", function () {
         const x = square.getAttribute("x"),
           y = square.getAttribute("y");
-        receiveAttack(x, y, computerBoard);
+        receiveAttack(x, y, computerBoard, ".computerSquares");
       });
     });
   };
 
   // check if all ships have been sunk in array
-  const checkIfAllSunk = (arr) => {
+  const checkIfAllSunk = (board) => {
     for (let i = 0; i <= board.length; i++) {
       if (arr[x] === "0" && arr[y] === "0") {
         return true;
@@ -461,11 +464,19 @@ const gameBoard = (() => {
     }
   };
 
+  // update dom to show hits / misses on computer board
+  const renderHitsMisses = () => {
+    for (let i = 0; i <= computerBoard.length; i++) {
+      if (computerBoard[i].ship.hitCount === "1") {
+      }
+    }
+  };
+
   return {
     displayInstructions,
     populatePlayerBoard,
-    playerBoard,
     populateComputerBoard,
+    playerBoard,
     computerBoard,
     placeShipForClick,
     placeShipForGeneration,
@@ -505,3 +516,5 @@ gameBoard.generateComputerCruiserShip();
 gameBoard.generateComputerSubmarineShip();
 
 gameBoard.generateComputerDestroyerShip();
+
+gameBoard.attackComputerBoardOnClick();
