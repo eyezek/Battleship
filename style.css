@@ -98,6 +98,18 @@ body {
   content: "💧";
 }
 
+.sunk::before {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  font-size: 28px;
+  background-color: black;
+  width: 35px;
+  height: 35px;
+  content: "☠️";
+}
+
 #shipstext {
   padding: 0;
   margin: 0px;

@@ -16,6 +16,10 @@
 //   return squareofsquares;
 // };
 
+let playerSquares = document.querySelectorAll(".playerSquares");
+
+let computerSquares = document.querySelectorAll(".computerSquares");
+
 // make squares that are to be rendered later
 const makeSquares = (classname) => {
   let num = 0;
@@ -75,8 +79,9 @@ class Ship {
   isSunk = () => {
     if (this.hitCount >= this.shipLength) {
       return true;
+    } else {
+      return false;
     }
-    return false;
   };
 }
 
@@ -436,6 +441,44 @@ const gameBoard = (() => {
     }
   };
 
+  let playerSquares = document.querySelectorAll(".playerSquares");
+
+  const renderSunkPlayerShips = () => {
+    let cl = ".playerSquares";
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (
+          typeof gameBoard.playerBoard[i][j] !== "string" &&
+          gameBoard.playerBoard[i][j].isSunk()
+        ) {
+          console.log(gameBoard.playerBoard[i][j]);
+          document
+            .querySelector(`${cl}[x='${i}'][y='${j}']`)
+            .classList.add("sunk");
+        }
+      }
+    }
+  };
+
+  let computerSquares = document.querySelectorAll(".computerSquares");
+
+  const renderSunkComputerShips = () => {
+    let cl = ".computerSquares";
+    for (let i = 0; i < 10; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (
+          typeof gameBoard.computerBoard[i][j] !== "string" &&
+          gameBoard.computerBoard[i][j].isSunk()
+        ) {
+          console.log(gameBoard.computerBoard[i][j]);
+          document
+            .querySelector(`${cl}[x='${i}'][y='${j}']`)
+            .classList.add("sunk");
+        }
+      }
+    }
+  };
+
   const sendComputerAttack = () => {
     let randomNum1 = Math.floor(Math.random() * (10 - 0) + 0);
     let randomNum2 = Math.floor(Math.random() * (10 - 0) + 0);
@@ -490,6 +533,8 @@ const gameBoard = (() => {
     attackComputerBoardOnClick,
     checkIfAllSunk,
     placeShipOnClick,
+    renderSunkPlayerShips,
+    renderSunkComputerShips,
   };
 })();
 
