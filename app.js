@@ -69,12 +69,13 @@ class Ship {
     this.shipLength = length;
     this.hitCount = 0;
   }
-  hit = (x, y) => {
+  hit = () => {
     if (this.isSunk()) {
       console.log("already sank");
       return;
+    } else {
+      this.hitCount++;
     }
-    this.hitCount++;
   };
   isSunk = () => {
     if (this.hitCount == this.shipLength) {
@@ -584,16 +585,20 @@ const gameBoard = (() => {
 
   // check if all ships have been sunk in array
   const checkIfAllSunk = (board) => {
+    let foundShipsArray = [];
     for (let i = 0; i < 10; i++) {
       for (let j = 0; j < 10; j++) {
-        console.log(j);
-        if (typeof board[i][j] !== "string" && board[i][j].isSunk()) {
-          return true;
-        } else {
-          return false;
+        if (typeof board[i][j] !== "string") {
+          foundShipsArray.push(board[i][j]);
         }
       }
     }
+    for (let i = 0; i < foundShipsArray.length; i++) {
+      if (foundShipsArray[i].hitCount < foundShipsArray[i].shipLength) {
+        return false;
+      }
+    }
+    return true;
   };
 
   const turn = () => {
@@ -607,9 +612,11 @@ const gameBoard = (() => {
           sendComputerAttack();
           renderSunkPlayerShips();
         } else if (checkIfAllSunk(playerBoard) === true) {
+          renderSunkComputerShips();
           square.removeEventListener;
           document.getElementById("instructions").innerHTML = "CPU Won... 🤕";
         } else if (checkIfAllSunk(computerBoard) === true) {
+          renderSunkComputerShips();
           square.removeEventListener;
           document.getElementById("instructions").innerHTML = "You Won! 🥳 ";
         }
