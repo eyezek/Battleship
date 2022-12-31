@@ -143,7 +143,7 @@ const gameBoard = (() => {
         if (x > 4) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
+            "Ship placed out of bounds 😐 Try again! 😁";
           return;
         }
         board[x][y] = ship;
@@ -179,7 +179,7 @@ const gameBoard = (() => {
         if (x > 5) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
+            "Ship placed out of bounds 😐 Try again! 😁";
           return;
         }
         board[x][y] = ship;
@@ -206,7 +206,7 @@ const gameBoard = (() => {
         if (x > 6) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
+            "Ship placed out of bounds 😐 Try again! 😁";
           return;
         }
         board[x][y] = ship;
@@ -229,7 +229,7 @@ const gameBoard = (() => {
         if (x > 6) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
+            "Ship placed out of bounds 😐 Try again! 😁";
           return;
         }
         board[x][y] = ship;
@@ -252,7 +252,7 @@ const gameBoard = (() => {
         if (x > 7) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
-            "Ship placed out of bounds :( Try again! :)";
+            "Ship placed out of bounds 😐 Try again! 😁";
           return;
         }
         board[x][y] = ship;
@@ -659,8 +659,6 @@ const game = () => {
 
   gameBoard.placeShipOnClick();
 
-  gameBoard.displayInstructions();
-
   gameBoard.generateComputerCarrierShip();
 
   gameBoard.generateComputerBattleship();
@@ -672,6 +670,8 @@ const game = () => {
   gameBoard.generateComputerDestroyerShip();
 
   gameBoard.attackComputerBoardOnClick();
+
+  gameBoard.displayInstructions();
 
   gameBoard.turn();
 };
