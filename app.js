@@ -140,7 +140,7 @@ const gameBoard = (() => {
     let ship = new Ship(name, length);
     if (currentShip === "Carrier") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 4) {
+        if (x > 5) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
             "Ship placed out of bounds 😐 Try again! 😁";
@@ -176,7 +176,7 @@ const gameBoard = (() => {
       }
     } else if (currentShip === "Battleship") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 5) {
+        if (x > 6) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
             "Ship placed out of bounds 😐 Try again! 😁";
@@ -203,7 +203,7 @@ const gameBoard = (() => {
       }
     } else if (currentShip === "Cruiser") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 6) {
+        if (x > 7) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
             "Ship placed out of bounds 😐 Try again! 😁";
@@ -226,7 +226,7 @@ const gameBoard = (() => {
       }
     } else if (currentShip === "Submarine") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 6) {
+        if (x > 7) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
             "Ship placed out of bounds 😐 Try again! 😁";
@@ -249,7 +249,7 @@ const gameBoard = (() => {
       }
     } else if (currentShip === "Destroyer") {
       for (let i = 0; i < ship.shipLength; i++) {
-        if (x > 7) {
+        if (x > 8) {
           console.log("Ship placed out of bounds...");
           document.getElementById("oobpopup").innerHTML =
             "Ship placed out of bounds 😐 Try again! 😁";
